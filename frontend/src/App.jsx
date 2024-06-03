@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import CreateBook from "./pages/CreateBook";
 import EditBook from "./pages/EditBook";
@@ -19,6 +19,7 @@ const App = () => {
         <Route path="/books/details/:id" element={<ShowBook />} />
         <Route path="/books/edit/:id" element={<EditBook />} />
         <Route path="/books/delete/:id" element={<DeleteBook />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
   );

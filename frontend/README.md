@@ -1,3 +1,5 @@
+cd into backend, run npm run dev, then open another terminal and cd into frontend, then run npm run dev and open the server.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

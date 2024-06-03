@@ -1,10 +1,25 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { BsInfoCircle } from "react-icons/bs";
+import HorizontalDropdown from "../HorizontalDropdown";
+import BookModal from "./BookModal";
 
 const BooksTable = ({ books }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedBook, setSelectedBook] = useState(null);
+
+  const handleShowModal = (book) => {
+    setSelectedBook(book);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedBook(null);
+  };
+
   return (
     <div className="content-center py-4 px-4 mx-auto max-w-screen-lg relative overflow-x-auto sm:rounded-lg border rounded-lg shadow">
-      <table className="text-left table-auto border-x border-b w-full border rounded-lg shadow-md">
+      <table className="text-left table-auto border-x border-b w-full border sm:rounded-lg rounded-lg shadow-md">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className="px-4 py-3">
@@ -19,9 +34,7 @@ const BooksTable = ({ books }) => {
             <th scope="col" className="px-4 py-3 max-md:hidden">
               Year published
             </th>
-            <th scope="col" className="px-4 py-3">
-              Action
-            </th>
+            <th scope="col" className="px-4 py-3"></th>
           </tr>
         </thead>
         <tbody>
@@ -42,14 +55,19 @@ const BooksTable = ({ books }) => {
               </td>
               <td className="px-4 py-3 max-md:hidden">{book.publishYear}</td>
               <td className="px-4 py-3">
-                <Link to={`/books/details/${book._id}`}>
-                  <BsInfoCircle className="text-2xl text-green-800" />
-                </Link>
+                <HorizontalDropdown
+                  book={book}
+                  setShowModal={handleShowModal}
+                  showOverview={false}
+                />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      {showModal && (
+        <BookModal book={selectedBook} onClose={handleCloseModal} />
+      )}
     </div>
   );
 };

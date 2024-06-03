@@ -3,23 +3,23 @@ import { AiOutlineClose } from "react-icons/ai";
 const BookModal = ({ book, onClose }) => {
   return (
     <div
-      className="fixed bg-black bg-opacity-60 top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60"
       onClick={onClose}
     >
       <div
         onClick={(event) => event.stopPropagation()}
-        className=" max-w-full p-4 flex flex-col relative"
+        className="relative w-11/12 max-w-2xl p-4 bg-white rounded-lg shadow-lg"
       >
         <AiOutlineClose
-          className="absolute right-6 top-6 text-3xl text-red-600 cursor-pointer"
+          className="absolute top-4 right-4 text-3xl text-red-600 cursor-pointer"
           onClick={onClose}
         />
-        <div className="bg-white overflow-hidden shadow rounded-lg border">
+        <div className="overflow-hidden bg-white shadow sm:rounded-lg">
           <div className="px-4 py-5 sm:px-6">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">
+            <h3 className="text-lg font-medium leading-6 text-gray-900">
               Book info
             </h3>
-            <p className="mt-1 max-w-2xl text-sm text-gray-500">{book._id}</p>
+            <p className="mt-1 text-sm text-gray-500">{book._id}</p>
           </div>
           <div className="border-t border-gray-200 px-4 py-5 sm:p-0">
             <dl className="sm:divide-y sm:divide-gray-200">
