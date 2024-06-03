@@ -13,11 +13,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function HorizontalDropdown({
-  book,
-  setShowModal,
-  showOverview = true,
-}) {
+export default function HorizontalDropdown({ book, onDelete }) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <MenuButton className="inline-flex items-center justify-center w-full p-2 text-sm font-medium text-gray-700 bg-white">
@@ -34,21 +30,6 @@ export default function HorizontalDropdown({
       >
         <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-            {showOverview && (
-              <MenuItem>
-                {({ focus }) => (
-                  <button
-                    onClick={() => setShowModal(true)}
-                    className={classNames(
-                      focus ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block w-full text-left px-4 py-2 text-sm"
-                    )}
-                  >
-                    Overview
-                  </button>
-                )}
-              </MenuItem>
-            )}
             <MenuItem>
               {({ focus }) => (
                 <Link
@@ -77,15 +58,15 @@ export default function HorizontalDropdown({
             </MenuItem>
             <MenuItem>
               {({ focus }) => (
-                <Link
-                  to={`/books/delete/${book._id}`}
+                <button
+                  onClick={onDelete}
                   className={classNames(
-                    focus ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm text-red-600 font-bold"
+                    focus ? "bg-gray-100 text-red-600" : "text-red-500",
+                    "block w-full text-left px-4 py-2 text-sm font-bold"
                   )}
                 >
                   Delete
-                </Link>
+                </button>
               )}
             </MenuItem>
           </div>

@@ -1,25 +1,11 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import HorizontalDropdown from "../HorizontalDropdown";
-import BookModal from "./BookModal";
+import { useState } from "react";
 
-const BooksTable = ({ books }) => {
-  const [showModal, setShowModal] = useState(false);
-  const [selectedBook, setSelectedBook] = useState(null);
-
-  const handleShowModal = (book) => {
-    setSelectedBook(book);
-    setShowModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-    setSelectedBook(null);
-  };
-
+const BooksTable = ({ books, onDelete }) => {
   return (
-    <div className="content-center py-4 px-4 mx-auto max-w-screen-lg relative overflow-x-auto sm:rounded-lg border rounded-lg shadow">
-      <table className="text-left table-auto border-x border-b w-full border sm:rounded-lg rounded-lg shadow-md">
+    <div className="content-center py-4 px-4 mx-auto max-w-screen-lg relative overflow-x-auto sm:rounded-lg ">
+      <table className="text-left table-auto border-x border-b w-full border rounded-lg shadow-md">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className="px-4 py-3">
@@ -57,17 +43,13 @@ const BooksTable = ({ books }) => {
               <td className="px-4 py-3">
                 <HorizontalDropdown
                   book={book}
-                  setShowModal={handleShowModal}
-                  showOverview={false}
+                  onDelete={() => onDelete(book)}
                 />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      {showModal && (
-        <BookModal book={selectedBook} onClose={handleCloseModal} />
-      )}
     </div>
   );
 };
